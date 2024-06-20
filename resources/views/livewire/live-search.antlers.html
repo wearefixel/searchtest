@@ -1,0 +1,32 @@
+<div>
+  {{ search_centered = collections_count <= 1 }}
+  <div class="w-full max-w-[1200px] mx-auto px-4 sm:px-6 md:px-10 xl:px-0">
+    <input
+      type="text"
+      class="p-4 w-full bg-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-150 ease-in-out"
+      placeholder="Search the Site"
+      wire:model.live.debounce.250ms="search"
+      autofocus
+    />
+    {{ if entries }}
+    <div class="space-y-4 mt-12">
+      {{ entries }}
+      <div
+        wire:loading.class="animate-pulse"
+        wire:key="{{ slug | md5 }}"
+        class="bg-white rounded-md p-4"
+      >
+        <h4 class="font-bold">{{ title }}</h4>
+        {{ if categories }}
+        <div class="flex flex-wrap gap-2 {{ classes }}">
+          {{ categories }}
+          <div class="font-medium">{{ title }}</div>
+          {{ /categories }}
+        </div>
+        {{ /if }}
+      </div>
+      {{ /entries }}
+    </div>
+    {{ /if }}
+  </div>
+</div>
